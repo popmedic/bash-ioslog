@@ -11,7 +11,9 @@ chmod guo+x <path>/ioslog
 
 ## Usage
 
-`ioslog <pcregrep arguments>`
+```
+ioslog <pcregrep arguments>
+```
 
 ### examples
 
