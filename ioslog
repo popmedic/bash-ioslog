@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Script arguments
+argc=$#
+argv=$@
+
+# Terminal colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# Make sure the user has `cfgutil`
+if [[ -z $(which cfgutil) ]]; then
+    echo -e "${RED}please install cfgutil using Configurator 2.  Instructions are here: ${NC}" >&2
+    exit 1
+fi
+
+# Get a list of all the devices
+dvcs=$(cfgutil list)
+cnt=${#dvcs[@]}
+
+# Make sure the device exists
+if [[ -z ${dvcs[0]} ]]; then 
+    echo -e "${RED}No devices attached${NC}" >&2
+    exit 1
+fi
+
+# Only one device, just start logging to install
+if [[ ${cnt} == 1 ]]; then
+    echo -e "${GREEN}only one device${NC}" >&2
+    dvc=${dvcs[0]}
+else
+    # Otherwise select the device
+    echo -e "
+    ${GREEN}which device?${NC}
+
+    index | device
+    -------|--------" >&2
+    for (( idx=0; idx<${cnt}; idx++ )); do
+        echo -e "   ${GREEN}${idx}${NC}   | ${dvcs[$idx]}" >&2
+    done
+    echo >&2
+    read -p "index> " idx
+    echo >&2
+    dvc=${dvcs[$idx]}
+fi
+
+# Get the ECID
+ecid=$(echo ${dvc} | pcregrep -o1 "ECID: (0x[0-9A-F]+) ")
+echo "here"
+name=$(echo ${dvc} | pcregrep -o1 "Name: (.+)")
+echo -e "${GREEN}syslog for ${name} with ECID of ${ecid}.${NC}" >&2
+
+# See if we are using a pcre
+if [[ $argc > 0 ]]; then
+    # Make sure pcregrep is installed
+    if [[ -z $(which pcregrep) ]]; then
+        echo -e "${RED}pcregrep  required${NC}\n>>> install with brew:\n   brew install pcre" >&2
+        exit 1
+    fi
+    echo -e "${GREEN}using pcregrep arguments: ${NC}$argv\n" >&2
+
+    # Print the log with pcre
+    cfgutil --ecid ${ecid} syslog | pcregrep $argv
+fi
+
+# Print the log
+echo >&2
+cfgutil --ecid ${ecid} syslog
