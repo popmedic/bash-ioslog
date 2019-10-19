@@ -32,7 +32,13 @@ ioslog -o1 "{{START}}(.*){{END}}"
 ### cfgutils 
 
 [Installation instructions](https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac)
-[Man pages](x-man-page://cfgutil)
+
+Manual
+
+```
+man cfgutil
+```
+
 
 ### pcregrep
 
@@ -42,4 +48,8 @@ To install
 brew install pcre
 ```
 
-[Man pages](https://www.pcre.org/original/doc/html/pcregrep.html)
+Manual
+
+```
+man pcregrep
+```
