@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+## USAGE ##
+# ioslog <pcregrep arguments>
+#
+# examples:
+#  ioslog MyProject
+#  ioslog -o1 "{{START}}(.*){{END}}"
+#
+# dependencies:
+# cfgutils - Installation instructions https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac
+# pcregrep - brew install pcre
+
 set -e
 
 # Script arguments
@@ -13,7 +24,8 @@ NC='\033[0m' # No Color
 
 # Make sure the user has `cfgutil`
 if [[ -z $(which cfgutil) ]]; then
-    echo -e "${RED}please install cfgutil using Configurator 2.  Instructions are here: ${NC}" >&2
+    echo -e "${RED}please install cfgutil using Configurator 2.  
+Instructions are here: https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac${NC}" >&2
     exit 1
 fi
 
@@ -49,7 +61,6 @@ fi
 
 # Get the ECID
 ecid=$(echo ${dvc} | pcregrep -o1 "ECID: (0x[0-9A-F]+) ")
-echo "here"
 name=$(echo ${dvc} | pcregrep -o1 "Name: (.+)")
 echo -e "${GREEN}syslog for ${name} with ECID of ${ecid}.${NC}" >&2
 
