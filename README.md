@@ -34,10 +34,10 @@ ioslog -o1 "{{START}}(.*){{END}}"
 
 ## dependencies
 
-### `cfgutils`
+### `cfgutil`
 
 - [Installation instructions](https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac)
-- `man cfgutils`
+- `man cfgutil`
 
 ### `pcregrep - brew install pcre`
 
