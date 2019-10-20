@@ -30,11 +30,11 @@ if [[ -z ${dvcs[0]} ]]; then
     exit 1
 fi
 
-# Only one device, just start logging to install
-# if [[ ${cnt} == 1 ]]; then
-#     echo -e "${GREEN}only one device${NC}" >&2
-#     dvc=${dvcs[0]}
-# else
+# Only one device, just start
+if [[ ${cnt} == 1 ]]; then
+    echo -e "${GREEN}only one device${NC}" >&2
+    dvc=${dvcs[0]}
+else
     # No index yet, select the device
     if [[ -z ${idx} ]]; then
         echo -e "
@@ -56,7 +56,7 @@ ${GREEN}which device?${NC}
     fi
     # Set the device based on the index
     dvc=${dvcs[$idx]}
-# fi
+fi
 
 # Get the ECID
 ecid=$(echo ${dvc} | pcregrep -o1 "ECID: (0x[0-9A-F]+) ")
