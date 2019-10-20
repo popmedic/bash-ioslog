@@ -52,11 +52,11 @@ respectively
 ## exit codes
 
 - success: 0
-- `cfgutil` not installed: 1011
-- no devices attached: 1012
-- index of device is out of range for devices: 1013
-- unable to parse the device in devices: 1014
-- `pcregrep` is not installed: 1015
+- `cfgutil` not installed: 101
+- no devices attached: 102
+- index of device is out of range for devices: 103
+- unable to parse the device in devices: 104
+- `pcregrep` is not installed: 105
 
 ## dependencies
 
