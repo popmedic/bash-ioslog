@@ -18,8 +18,8 @@ curl -o <path>/ioslog \
 
 where:
 
-- &lt;idx=[device index]&gt; : optional value, device index to use for the device
-- &lt;pcregrep arguments&gt; : optional value, arguments for pcregrep see `man pcregrep` from more information
+- `<idx=[device index]>` : optional value, device index to use for the device
+- `<pcregrep arguments>` : optional value, arguments for pcregrep see `man pcregrep` from more information
 
 ## examples
 
