@@ -14,23 +14,23 @@ where:
 
 ## examples
 
-> view log
-
 ```
 ioslog
 ```
 
-> view lines that contain MyProject
+> view log
 
 ```
 ioslog "MyProject"
 ```
 
-> view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
+> view lines that contain MyProject
 
 ```
 ioslog -o1 "{{START}}(.*){{END}}"
 ```
+
+> view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
 
 ## dependencies
 
