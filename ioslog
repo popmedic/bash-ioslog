@@ -4,6 +4,14 @@
 
 set -e
 
+# Exit Codes
+success=0
+no_cfgutil=1011
+no_devices=1012
+index_out_of_range=1013
+index_unparsable=1014
+no_pcre=1015
+
 # Script arguments
 argc=$#
 argv=$@
@@ -17,7 +25,7 @@ NC='\033[0m' # No Color
 if [[ -z $(which cfgutil) ]]; then
     echo -e "${RED}please install cfgutil using Configurator 2.  
 Instructions are here: https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac${NC}" >&2
-    exit 1
+    exit ${no_cfgutil}
 fi
 
 # Get a list of all the devices
@@ -27,7 +35,7 @@ cnt=${#dvcs[@]}
 # Make sure the device exists
 if [[ -z ${dvcs[0]} ]]; then 
     echo -e "${RED}No devices attached${NC}" >&2
-    exit 1
+    exit ${no_devices}
 fi
 
 # Only one device, just start
@@ -52,7 +60,7 @@ ${GREEN}which device?${NC}
     # Make sure the index is in range
     if [[ -z "${idx##*[!0-9]*}" || ${idx} -ge ${cnt} ]]; then
         echo -e "${RED}index ${idx} out of range ${cnt}${NC}"
-        exit 1
+        exit ${index_out_of_range}
     fi
     # Set the device based on the index
     dvc=${dvcs[$idx]}
@@ -61,14 +69,20 @@ fi
 # Get the ECID
 ecid=$(echo ${dvc} | pcregrep -o1 "ECID: (0x[0-9A-F]+) ")
 name=$(echo ${dvc} | pcregrep -o1 "Name: (.+)")
+if [[ -z ${ecid} || -z ${name} ]]; then
+    echo -e "${RED}index ${idx} in devices ${dvcs} is not parsable${NC}"
+    exit ${index_unparsable}
+fi
 echo -e "${GREEN}syslog for ${name} with ECID of ${ecid}.${NC}" >&2
 
 # See if we are using a pcre
 if [[ $argc > 0 ]]; then
     # Make sure pcregrep is installed
     if [[ -z $(which pcregrep) ]]; then
-        echo -e "${RED}pcregrep  required${NC}\n>>> install with brew:\n   brew install pcre" >&2
-        exit 1
+        echo -e "${RED}pcregrep required${NC}
+>>> install with brew:
+    brew install pcre" >&2
+        exit no_pcre
     fi
     echo -e "${GREEN}using pcregrep arguments: ${NC}$argv\n" >&2
 
@@ -79,3 +93,4 @@ fi
 # Print the log
 echo >&2
 cfgutil --ecid ${ecid} syslog
+exit success
