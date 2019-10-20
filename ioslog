@@ -75,6 +75,12 @@ if [[ -z ${ecid} || -z ${name} ]]; then
 fi
 echo -e "${GREEN}syslog for ${name} with ECID of ${ecid}.${NC}" >&2
 
+# trap sigint for error handling
+trap ctrl_c SIGINT
+function ctrl_c {
+    exit ${success}
+}
+
 # See if we are using a pcre
 if [[ $argc > 0 ]]; then
     # Make sure pcregrep is installed
@@ -93,5 +99,3 @@ else
     echo >&2
     cfgutil --ecid ${ecid} syslog
 fi
-
-exit ${success}
