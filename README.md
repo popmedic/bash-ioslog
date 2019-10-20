@@ -49,7 +49,7 @@ ioslog -o1 "{{START}}(.*){{END}}"
 > view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} 
 respectively 
 
-## Exit Codes
+## exit codes
 
 - success: 0
 - `cfgutil` not installed: 1011
