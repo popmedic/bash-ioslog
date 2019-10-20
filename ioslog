@@ -82,15 +82,16 @@ if [[ $argc > 0 ]]; then
         echo -e "${RED}pcregrep required${NC}
 >>> install with brew:
     brew install pcre" >&2
-        exit no_pcre
+        exit ${no_pcre}
     fi
     echo -e "${GREEN}using pcregrep arguments: ${NC}$argv\n" >&2
 
     # Print the log with pcre
     cfgutil --ecid ${ecid} syslog | pcregrep $argv
+    exit ${success}
 fi
 
 # Print the log
 echo >&2
 cfgutil --ecid ${ecid} syslog
-exit success
+exit ${success}
