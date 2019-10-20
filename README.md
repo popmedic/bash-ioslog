@@ -2,56 +2,44 @@
 
 bash script to use cfgutil syslog and get log information
 
-## Install
+## usage
 
 ```
-curl -o <path>/ioslog https://raw.githubusercontent.com/popmedic/bash-ioslog/master/ioslog && \
-chmod guo+x <path>/ioslog
+<idx=[device index]> ioslog <pcregrep arguments>
 ```
 
-## Usage
+where:
+- <idx=[device index]> : optional value, device index to use for the device
+- <pcregrep arguments> : optional value, arguments for pcregrep see `man pcregrep` from more information
+
+## examples
+
+> view log
 
 ```
-<path>/ioslog <pcregrep arguments>
+ioslog
 ```
 
-### examples
-
-only show lines that have the word MyProject in them
+> View lines that contain MyProject
 
 ```
-ioslog MyProject
+ioslog "MyProject"
 ```
 
-show the contents between {{START}} and {{END}} on a line
+> View only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
 
 ```
 ioslog -o1 "{{START}}(.*){{END}}"
 ```
 
-## Dependencies
+## dependencies
 
-### cfgutils 
+### `cfgutils`
 
-[Installation instructions](https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac)
+- [Installation instructions](https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac)
+- `man cfgutils`
 
-Manual
+### `pcregrep - brew install pcre`
 
-```
-man cfgutil
-```
-
-
-### pcregrep
-
-To install
-
-```
-brew install pcre
-```
-
-Manual
-
-```
-man pcregrep
-```
+- Install: `brew install pcre`
+- `man pcregrep`
