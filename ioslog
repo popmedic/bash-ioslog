@@ -6,11 +6,11 @@ set -e
 
 # Exit Codes
 success=0
-no_cfgutil=1011
-no_devices=1012
-index_out_of_range=1013
-index_unparsable=1014
-no_pcre=1015
+no_cfgutil=101
+no_devices=102
+index_out_of_range=103
+index_unparsable=104
+no_pcre=105
 
 # Script arguments
 argc=$#
