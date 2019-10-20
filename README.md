@@ -39,7 +39,7 @@ ioslog -o1 "{{START}}(.*){{END}}"
 - [Installation instructions](https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac)
 - `man cfgutil`
 
-### `pcregrep - brew install pcre`
+### `pcregrep`
 
 - Install: `brew install pcre`
 - `man pcregrep`
