@@ -88,10 +88,10 @@ if [[ $argc > 0 ]]; then
 
     # Print the log with pcre
     cfgutil --ecid ${ecid} syslog | pcregrep $argv
-    exit ${success}
+else
+    # Print the log
+    echo >&2
+    cfgutil --ecid ${ecid} syslog
 fi
 
-# Print the log
-echo >&2
-cfgutil --ecid ${ecid} syslog
 exit ${success}
