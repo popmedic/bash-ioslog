@@ -56,7 +56,7 @@ respectively
 - no devices attached: 1012
 - index of device is out of range for devices: 1013
 - unable to parse the device in devices: 1014
-- `pcregrep is not installed: 1015
+- `pcregrep` is not installed: 1015
 
 ## dependencies
 
