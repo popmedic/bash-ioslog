@@ -39,13 +39,15 @@ ioslog "MyProject"
 idx=1 ioslog -oi "[\[0-9a-f\]\{8\}]{.*?}"
 ```
 
-> view value from "[" followed by a hex value 8 characters long then "]{" then anything, non greed, ending with a "}"
+> using the device at index 1, view value from "[" followed by a hex value 8 characters long then "]{" 
+then anything, non greed, ending with a "}"
 
 ```
 ioslog -o1 "{{START}}(.*){{END}}"
 ```
 
-> view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
+> view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} 
+respectively 
 
 ## dependencies
 
