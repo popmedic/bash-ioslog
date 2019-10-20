@@ -49,6 +49,15 @@ ioslog -o1 "{{START}}(.*){{END}}"
 > view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} 
 respectively 
 
+## Exit Codes
+
+- success: 0
+- `cfgutil` not installed: 1011
+- no devices attached: 1012
+- index of device is out of range for devices: 1013
+- unable to parse the device in devices: 1014
+- `pcregrep is not installed: 1015
+
 ## dependencies
 
 ### `cfgutil`
