@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 
-## USAGE ##
-# ioslog <pcregrep arguments>
-#
-# examples:
-#  ioslog MyProject
-#  ioslog -o1 "{{START}}(.*){{END}}"
-#
-# dependencies:
-# cfgutils - Installation instructions https://support.apple.com/en-ca/guide/apple-configurator-2/cad856a8ea58/mac
-# pcregrep - brew install pcre
+USAGE='See https://github.com/popmedic/bash-ioslog/blob/master/README.md'
 
 set -e
 
@@ -40,24 +31,32 @@ if [[ -z ${dvcs[0]} ]]; then
 fi
 
 # Only one device, just start logging to install
-if [[ ${cnt} == 1 ]]; then
-    echo -e "${GREEN}only one device${NC}" >&2
-    dvc=${dvcs[0]}
-else
-    # Otherwise select the device
-    echo -e "
-    ${GREEN}which device?${NC}
+# if [[ ${cnt} == 1 ]]; then
+#     echo -e "${GREEN}only one device${NC}" >&2
+#     dvc=${dvcs[0]}
+# else
+    # No index yet, select the device
+    if [[ -z ${idx} ]]; then
+        echo -e "
+${GREEN}which device?${NC}
 
-    index | device
-    -------|--------" >&2
-    for (( idx=0; idx<${cnt}; idx++ )); do
-        echo -e "   ${GREEN}${idx}${NC}   | ${dvcs[$idx]}" >&2
-    done
-    echo >&2
-    read -p "index> " idx
-    echo >&2
+ index | device
+-------|--------" >&2
+        for (( idx=0; idx<${cnt}; idx++ )); do
+            echo -e "   ${GREEN}${idx}${NC}   | ${dvcs[$idx]}" >&2
+        done
+        echo >&2
+        read -p "index> " idx
+        echo >&2
+    fi
+    # Make sure the index is in range
+    if [[ -z "${idx##*[!0-9]*}" || ${idx} -ge ${cnt} ]]; then
+        echo -e "${RED}index ${idx} out of range ${cnt}${NC}"
+        exit 1
+    fi
+    # Set the device based on the index
     dvc=${dvcs[$idx]}
-fi
+# fi
 
 # Get the ECID
 ecid=$(echo ${dvc} | pcregrep -o1 "ECID: (0x[0-9A-F]+) ")
