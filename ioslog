@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-USAGE='See https://github.com/popmedic/bash-ioslog/blob/master/README.md'
+# USAGE: See https://github.com/popmedic/bash-ioslog/blob/master/README.md
 
 set -e
 
