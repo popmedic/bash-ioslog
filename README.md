@@ -1,4 +1,4 @@
-# bash-ioslog
+# ioslog
 
 bash script to use cfgutil syslog and get log information
 
@@ -9,8 +9,8 @@ bash script to use cfgutil syslog and get log information
 ```
 
 where:
-- <idx=[device index]> : optional value, device index to use for the device
-- <pcregrep arguments> : optional value, arguments for pcregrep see `man pcregrep` from more information
+- &lt;idx=[device index]&gt; : optional value, device index to use for the device
+- &lt;pcregrep arguments&gt; : optional value, arguments for pcregrep see `man pcregrep` from more information
 
 ## examples
 
@@ -20,13 +20,13 @@ where:
 ioslog
 ```
 
-> View lines that contain MyProject
+> view lines that contain MyProject
 
 ```
 ioslog "MyProject"
 ```
 
-> View only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
+> view only values between {{START}} to {{END}} on lines that contain {{START}} and {{END}} respectively
 
 ```
 ioslog -o1 "{{START}}(.*){{END}}"
