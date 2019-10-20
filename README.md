@@ -17,6 +17,7 @@ curl -o <path>/ioslog \
 ```
 
 where:
+
 - &lt;idx=[device index]&gt; : optional value, device index to use for the device
 - &lt;pcregrep arguments&gt; : optional value, arguments for pcregrep see `man pcregrep` from more information
 
@@ -33,6 +34,12 @@ ioslog "MyProject"
 ```
 
 > view lines that contain MyProject
+
+```
+idx=1 ioslog -oi "[\[0-9a-f\]\{8\}]{.*?}"
+```
+
+> view value from "[" followed by a hex value 8 characters long then "]{" then anything, non greed, ending with a "}"
 
 ```
 ioslog -o1 "{{START}}(.*){{END}}"
