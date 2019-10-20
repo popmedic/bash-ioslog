@@ -5,7 +5,9 @@ bash script to use cfgutil syslog and get log information
 ## installation
 
 ```
-curl -o <path>/ioslog https://raw.githubusercontent.com/popmedic/bash-ioslog/master/ioslog && chmod guo+x <path>/ioslog
+curl -o <path>/ioslog \
+     https://raw.githubusercontent.com/popmedic/bash-ioslog/master/ioslog && \
+     chmod guo+x <path>/ioslog
 ```
 
 ## usage
